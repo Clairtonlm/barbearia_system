@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Barbearia</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="assests/css/style.css">
+  <style>
+    .dashboard-sidebar {
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      z-index: 100;
+      padding-top: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background-color: #f8f9fa;
+    }
+    #dashboardContent {
+      margin-left: 250px;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .list-group-item {
+      border: none;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+    .list-group-item:hover {
+      background-color: #e9ecef;
+      transform: translateX(5px);
+    }
+    .list-group-item.active {
+      background-color: #007bff;
+      color: white;
+    }
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid bg-secondary text-white py-2" style="display: none;">
+    <div id="navbar-info" class="container text-center">
+      <!-- Nova Navbar Moderna -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="dashboard.html">
+            <img src="assests/img/logo.png" alt="Logo Barbearia" height="40" class="d-inline-block align-text-top">
+            Barbearia System
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="dashboard.html">
+                  <i class="bi bi-house-fill me-1"></i>Início
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="agendamento.html">
+                  <i class="bi bi-calendar-check me-1"></i>Agendamentos
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="produtos.html">
+                  <i class="bi bi-cart-fill me-1"></i>Produtos
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle me-1"></i>Minha Conta
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Configurações</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item text-danger" href="index.html"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Menu Lateral -->
+      <div class="col-md-2 col-lg-2 dashboard-sidebar">
+        <div class="d-flex flex-column h-100">
+          <div class="text-center mb-4">
+            <h4 class="text-primary">Barbearia</h4>
+            <div id="usuarioInfo" class="text-muted small"></div>
+          </div>
+          <div class="list-group list-group-flush flex-grow-1">
+            <a href="#" class="list-group-item list-group-item-action" data-section="inicio">
+              <i class="bi bi-house me-2"></i>Início
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" data-section="agendamento">
+              <i class="bi bi-calendar-check me-2"></i>Agendamentos
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" data-section="produtos">
+              <i class="bi bi-box me-2"></i>Produtos
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" data-section="clientes">
+              <i class="bi bi-people me-2"></i>Clientes
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" data-section="funcionarios">
+              <i class="bi bi-person-workspace me-2"></i>Funcionários
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" data-section="financeiro">
+              <i class="bi bi-cash-coin me-2"></i>Financeiro
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" data-section="relatorio">
+              <i class="bi bi-file-earmark-text me-2"></i>Relatórios
+            </a>
+          </div>
+          <div class="mt-auto">
+            <a href="#" class="list-group-item list-group-item-action text-danger" id="logout">
+              <i class="bi bi-box-arrow-right me-2"></i>Sair
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conteúdo Principal -->
+      <main id="dashboardContent" class="col-md-10 ms-sm-auto col-lg-10 px-4">
+        <!-- Conteúdo dinâmico será carregado aqui -->
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const usuarioInfo = document.getElementById('usuarioInfo');
+      const logoutButton = document.getElementById('logout');
+      const dashboardContent = document.getElementById('dashboardContent');
+      const sectionLinks = document.querySelectorAll('.list-group-item[data-section]');
+
+      // Verifica se há usuário logado
+      const usuarioLogado = localStorage.getItem('usuarioLogado');
+      if (usuarioLogado) {
+        const usuario = JSON.parse(usuarioLogado);
+        usuarioInfo.innerHTML = `Olá, ${usuario.nome}`;
+      } else {
+        // Redireciona para login se não estiver logado
+        window.location.href = 'index.html';
+      }
+
+      // Adiciona evento de logout
+      logoutButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('usuarioLogado');
+        window.location.href = 'index.html';
+      });
+
+      // Função para carregar conteúdo das seções
+      async function loadSectionContent(section) {
+        try {
+          let content = '';
+          switch(section) {
+            case 'inicio':
+              // Obtém o nome do usuário logado
+              const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+              const nomeUsuario = usuarioLogado ? usuarioLogado.nome.split(' ')[0] : 'Usuário';
+              
+              // Função para saudação baseada no horário
+              function obterSaudacao() {
+                const hora = new Date().getHours();
+                if (hora < 12) return 'Bom dia';
+                if (hora < 18) return 'Boa tarde';
+                return 'Boa noite';
+              }
+
+              content = `
+                <div class="dashboard-header mb-4">
+                  <div>
+                    <h2 class="mb-1">${obterSaudacao()}, ${nomeUsuario}!</h2>
+                    <p class="text-muted">
+                      ${new Date().toLocaleDateString('pt-BR', { 
+                        weekday: 'long', 
+                        day: 'numeric', 
+                        month: 'long', 
+                        year: 'numeric' 
+                      })}
+                    </p>
+                  </div>
+                  <div class="text-end">
+                    <span class="badge bg-primary">
+                      <i class="bi bi-person-circle me-2"></i>${nomeUsuario}
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <h5 class="card-title">Agendamentos Hoje</h5>
+                        <p class="card-text display-6">5</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <h5 class="card-title">Clientes</h5>
+                        <p class="card-text display-6">42</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <h5 class="card-title">Receita Hoje</h5>
+                        <p class="card-text display-6">R$ 850</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Agendamentos do Dia</h5>
+                  </div>
+                  <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                      <thead>
+                        <tr>
+                          <th>Hora</th>
+                          <th>Cliente</th>
+                          <th>Serviço</th>
+                          <th>Telefone</th>
+                          <th>Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>09:00</td>
+                          <td>João Silva</td>
+                          <td>Corte Masculino</td>
+                          <td>(11) 98765-4321</td>
+                          <td>
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#clienteModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-success">
+                              <i class="bi bi-check-circle"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>10:30</td>
+                          <td>Pedro Santos</td>
+                          <td>Barba</td>
+                          <td>(11) 97654-3210</td>
+                          <td>
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#clienteModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-success">
+                              <i class="bi bi-check-circle"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>14:00</td>
+                          <td>Carlos Oliveira</td>
+                          <td>Corte e Barba</td>
+                          <td>(11) 96543-2109</td>
+                          <td>
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#clienteModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-success">
+                              <i class="bi bi-check-circle"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>15:30</td>
+                          <td>Ricardo Almeida</td>
+                          <td>Corte Masculino</td>
+                          <td>(11) 95432-1098</td>
+                          <td>
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#clienteModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-success">
+                              <i class="bi bi-check-circle"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>16:45</td>
+                          <td>Marcos Ferreira</td>
+                          <td>Barba</td>
+                          <td>(11) 94321-0987</td>
+                          <td>
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#clienteModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-success">
+                              <i class="bi bi-check-circle"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- Modal de Detalhes do Cliente -->
+                <div class="modal fade" id="clienteModal" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Detalhes do Cliente</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <strong>Nome:</strong> <span id="clienteNome">João Silva</span>
+                          </div>
+                          <div class="col-md-6">
+                            <strong>Telefone:</strong> <span id="clienteTelefone">(11) 98765-4321</span>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="col-md-6">
+                            <strong>Serviço:</strong> <span id="clienteServico">Corte Masculino</span>
+                          </div>
+                          <div class="col-md-6">
+                            <strong>Horário:</strong> <span id="clienteHorario">09:00</span>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="col-12">
+                            <strong>Histórico de Atendimentos:</strong>
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item">15/11/2023 - Corte Masculino</li>
+                              <li class="list-group-item">22/10/2023 - Barba</li>
+                              <li class="list-group-item">05/09/2023 - Corte e Barba</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+              break;
+            default:
+              const response = await fetch(`${section}.html`);
+              content = await response.text();
+          }
+          dashboardContent.innerHTML = content;
+        } catch (error) {
+          dashboardContent.innerHTML = `<div class="alert alert-danger">Erro ao carregar ${section}</div>`;
+        }
+      }
+
+      // Função para gerar agendamentos do dia
+      function gerarAgendamentosDoDia() {
+        const hoje = new Date().toLocaleDateString('pt-BR');
+        const agendamentos = [
+          { hora: '09:00', cliente: 'João Silva', servico: 'Corte Masculino' },
+          { hora: '10:30', cliente: 'Pedro Santos', servico: 'Barba' },
+          { hora: '14:00', cliente: 'Carlos Oliveira', servico: 'Corte e Barba' },
+          { hora: '15:30', cliente: 'Ricardo Almeida', servico: 'Corte Masculino' },
+          { hora: '16:45', cliente: 'Marcos Ferreira', servico: 'Barba' }
+        ];
+
+        const agendamentosHtml = `
+          <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0">Agendamentos do Dia (${hoje})</h5>
+            </div>
+            <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th>Hora</th>
+                    <th>Cliente</th>
+                    <th>Serviço</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${agendamentos.map(agendamento => `
+                    <tr>
+                      <td>${agendamento.hora}</td>
+                      <td>${agendamento.cliente}</td>
+                      <td>${agendamento.servico}</td>
+                      <td>
+                        <button class="btn btn-sm btn-info">Detalhes</button>
+                        <button class="btn btn-sm btn-success">Confirmar</button>
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+
+        return agendamentosHtml;
+      }
+
+      // Adiciona evento de clique nas seções
+      sectionLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const section = link.getAttribute('data-section');
+          
+          // Carrega conteúdo da seção
+          loadSectionContent(section).then(() => {
+            // Não insere agendamentos do dia
+          });
+
+          // Remove classe active de todos os links
+          sectionLinks.forEach(l => l.classList.remove('active'));
+          // Adiciona classe active no link clicado
+          link.classList.add('active');
+        });
+      });
+
+      // Carrega conteúdo inicial (início)
+      loadSectionContent('inicio');
+      document.querySelector('[data-section="inicio"]').classList.add('active');
+    });
+  </script>
+</body>
+</html>
